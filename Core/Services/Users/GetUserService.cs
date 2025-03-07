@@ -21,9 +21,13 @@ namespace Core.Services.Users
             return _userRepository.Get(id);
         }
 
-        public IEnumerable<User> GetUsers(UserTypes? userType = null, string name = null, string email = null)
+        public IEnumerable<User> GetUsers(int skip, int take, UserTypes? userType = null, string name = null, string email = null)
         {
-            return _userRepository.Get(userType, name, email);
+            return _userRepository.Get(skip, take, userType, name, email);
+        }
+        public IEnumerable<User> GetUsersByTag(string tag)
+        {
+            return _userRepository.GetBytag(tag);
         }
     }
 }

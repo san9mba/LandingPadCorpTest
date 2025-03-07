@@ -1,6 +1,8 @@
 ﻿using BusinessEntities;
 using Common;
+using Common.Exceptions;
 using Data.Repositories;
+using System;
 
 namespace Core.Services.Users
 {
@@ -14,6 +16,10 @@ namespace Core.Services.Users
             _userRepository = userRepository;
         }
 
+        public void Delete(Guid id)
+        {
+            this.Delete(_userRepository.Get(id) ?? throw new EntityNotFoundException(nameof(User), id.ToString()));
+        }
         public void Delete(User user)
         {
             _userRepository.Delete(user);

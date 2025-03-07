@@ -17,7 +17,7 @@ namespace Data.Repositories
             _documentSession = documentSession;
         }
 
-        public IEnumerable<User> Get(UserTypes? userType = null, string name = null, string email = null)
+        public IEnumerable<User> Get(int skip, int take, UserTypes? userType = null, string name = null, string email = null)
         {
             var query = _documentSession.Advanced.DocumentQuery<User, UsersListIndex>();
 
@@ -49,6 +49,21 @@ namespace Data.Repositories
                 }
                 query = query.WhereEquals("Email", email);
             }
+
+            return query
+                .Skip(skip)
+                .Take(take)
+                .ToList();
+        }
+
+        public IEnumerable<User> GetBytag(string tag)
+        {
+            var query = _documentSession.Advanced.DocumentQuery<User, UsersListByTagIndex>();
+            if (string.IsNullOrEmpty(tag))
+                // I'm not expert at Raven and not sure how effective this search it, but you can retreive users without tags
+                query = query.Where("Tags_Count:0");
+            else
+                query = query.WhereIn(nameof(User.Tags), new[] { tag });
             return query.ToList();
         }
 

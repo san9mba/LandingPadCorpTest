@@ -1,10 +1,15 @@
+This is my general overview for this project. I didn't try to change a lot, only some fixes. Also as there are no any requirements for the logic I made it as simple as possible to show the main idead of implementation and moving this project to big unit.
+
+This project must contain unit tests, but since writing unit tests takes a lot of time, I didn't add them. It's not because I'm lazy—it's because I didn't see the point. If you like my changes and code, I will explain what I will use for testing and how to test.
+
 Made some refactors:
-1. I don't like that some buisness logics was at controllers, like check if user exists, before updating. That should be done at service layer. At controller we need to receive the request, validate request, some auth stuff and return response.
-2. In GetUsers method, I moved skip&take logic to service layer, cause service could return all recors(if no filters) and take params is only 1 or 10, means we load more records from DB but we don't need it. So we take from DB as much data as we need and optimize our code and DB load.
-3. Use base method for try/catch for known issues, like UserExsists or EntityNotFound. I prefer returning from Service layer data + message, if it happend and avoid throwing exception, but for this project it's fine.
-4. add validation, to avoid exceptions and process only valid requests
+1. I didn't like that some business logic was in controllers, like checking if a user exists before updating. That should be handled in the service layer. The controller should only receive the request, validate it, handle authentication, and return a response.
+2. In the GetUsers method, I moved the skip & take logic to the service layer because the service could return all records (if no filters are applied). The take parameter is only 1 or 10, meaning we were loading more records from the database than needed. Now, we fetch only the required data, optimizing both our code and database load.
+3. I used a base method for try/catch to handle known issues like UserExists or EntityNotFound. I prefer returning data + a message from the service layer when these happen, avoiding exceptions, but for this project, it's fine.
+Added validation to avoid exceptions and process only valid requests.
+General notes:
+There's a lot that could be improved, but that’s not the main focus of this task. Also, since this project is written in .NET Framework, some parts are outdated and, of course, could be improved.
 
+Thanks for the review! Looking forward to discussing everything.
 
-
-As general, it's a lot of stuff that could be improved, but tasks is not about it and project wrote on .NET Framework, which means some stuff is old and ofcource could be improved.
-Thanks for review and would be glad to discuss everything.
+Let me know if you'd like any further tweaks!

@@ -4,7 +4,7 @@ using BusinessEntities;
 using Common;
 using Common.Exceptions;
 using Core.Factories;
-using Data.Repositories;
+using Infrastructure.Repositories;
 
 namespace Core.Services.Users
 {

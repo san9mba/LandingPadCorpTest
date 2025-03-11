@@ -12,12 +12,20 @@ namespace WebApi.Controllers
     {
         public HttpResponseMessage ExecuteWitValidation<TValidator, TModel>(TModel model, Func<HttpResponseMessage> func) where TValidator : AbstractValidator<TModel>
         {
+            // could be if request exceed max size
+            if(model == null)
+                return ControllerContext.Request.CreateResponse(HttpStatusCode.BadRequest, new { message = "Invalid request. Check request parameters" });
+
             var validator = Activator.CreateInstance<TValidator>();
             var validationResult = validator.Validate(model);
             if (!validationResult.IsValid)
             {
-                var errorMessages = string.Join(", ", validationResult.Errors.Select(e => e.ErrorMessage));
-                return ControllerContext.Request.CreateResponse(HttpStatusCode.BadRequest, new { message = errorMessages });
+                var errorMessages = validationResult.Errors.Select(e => e.ErrorMessage).ToList();
+                return ControllerContext.Request.CreateResponse(HttpStatusCode.BadRequest, new
+                {
+                    message = "Validation failed",
+                    errors = errorMessages
+                });
             }
 
             return ExecuteWithTryCatch(func);
@@ -30,7 +38,10 @@ namespace WebApi.Controllers
             {
                 response = func();
             }
-
+            catch(OutOfStockException outOfStockException)
+            {
+                return InvalidRequest(outOfStockException.Message);
+            }
             catch (EntityAlreadyExistsException duplicateException)
             {
                 return InvalidRequest(duplicateException.Message);

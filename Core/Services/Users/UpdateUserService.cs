@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using BusinessEntities;
 using Common;
 using Common.Exceptions;
-using Data.Repositories;
+using Infrastructure.Repositories;
 
 namespace Core.Services.Users
 {
@@ -23,6 +23,7 @@ namespace Core.Services.Users
             user.SetName(name);
             user.SetType(type);
             user.SetMonthlySalary(annualSalary ?? 0 / 12);
+            // I don't know by the logic, can tags set as empty or no, so as it's list - looks like yes
             user.SetTags(tags);
         }
 

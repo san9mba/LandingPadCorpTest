@@ -3,23 +3,24 @@ using System.Linq;
 using BusinessEntities;
 using Common;
 using Data.Indexes;
-using Raven.Client;
+using Data.Providers;
+using Infrastructure.Repositories;
 
 namespace Data.Repositories
 {
     [AutoRegister]
     public class UserRepository : Repository<User>, IUserRepository
     {
-        private readonly IDocumentSession _documentSession;
+        private readonly IRavenDbDataProvider<User> _ravenDbProvider;
 
-        public UserRepository(IDocumentSession documentSession) : base(documentSession)
+        public UserRepository(IRavenDbDataProvider<User> ravenDbProvider) : base(ravenDbProvider)
         {
-            _documentSession = documentSession;
+            _ravenDbProvider = ravenDbProvider;
         }
 
         public IEnumerable<User> Get(int skip, int take, UserTypes? userType = null, string name = null, string email = null)
         {
-            var query = _documentSession.Advanced.DocumentQuery<User, UsersListIndex>();
+            var query = _ravenDbProvider.DocumentSession.Advanced.DocumentQuery<User, UsersListIndex>();
 
             var hasFirstParameter = false;
             if (userType != null)
@@ -58,7 +59,7 @@ namespace Data.Repositories
 
         public IEnumerable<User> GetBytag(string tag)
         {
-            var query = _documentSession.Advanced.DocumentQuery<User, UsersListByTagIndex>();
+            var query = _ravenDbProvider.DocumentSession.Advanced.DocumentQuery<User, UsersListByTagIndex>();
             if (string.IsNullOrEmpty(tag))
                 // I'm not expert at Raven and not sure how effective this search it, but you can retreive users without tags
                 query = query.Where("Tags_Count:0");
@@ -69,7 +70,7 @@ namespace Data.Repositories
 
         public void DeleteAll()
         {
-            base.DeleteAll<UsersListIndex>();
+            _ravenDbProvider.DeleteAll<UsersListIndex>();
         }
     }
 }

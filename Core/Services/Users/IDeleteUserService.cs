@@ -1,10 +1,11 @@
 ﻿using BusinessEntities;
+using System;
 
 namespace Core.Services.Users
 {
     public interface IDeleteUserService
     {
-        void Delete(User user);
+        void Delete(Guid id);
         void DeleteAll();
     }
 }

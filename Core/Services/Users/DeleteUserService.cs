@@ -1,6 +1,6 @@
-﻿using BusinessEntities;
-using Common;
+﻿using Common;
 using Data.Repositories;
+using System;
 
 namespace Core.Services.Users
 {
@@ -14,9 +14,9 @@ namespace Core.Services.Users
             _userRepository = userRepository;
         }
 
-        public void Delete(User user)
+        public void Delete(Guid id)
         {
-            _userRepository.Delete(user);
+            _userRepository.Delete(id);
         }
 
         public void DeleteAll()

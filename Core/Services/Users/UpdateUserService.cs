@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using BusinessEntities;
 using Common;
 using Common.Exceptions;
-using Infrastructure.Repositories;
+using Data.Repositories;
 
 namespace Core.Services.Users
 {

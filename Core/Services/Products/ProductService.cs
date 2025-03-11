@@ -4,7 +4,7 @@ using Common;
 using Common.Exceptions;
 using Core.Dtos;
 using Core.Factories;
-using Infrastructure.Repositories;
+using Data.Repositories;
 using Infrastructure.Services;
 using System;
 using System.Collections.Generic;

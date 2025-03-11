@@ -1,12 +1,12 @@
 ﻿using BusinessEntities;
 using BusinessEntities.Sales;
 using Common;
-using Infrastructure.DataProviders;
+using Data.DataProviders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace EFDataProvider
+namespace Data.Providers
 {
     [AutoRegister(AutoRegisterTypes.Singleton)]
     public class InMemoryProvider<T> : IDataProvider<T> where T : IdObject

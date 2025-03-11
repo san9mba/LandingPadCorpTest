@@ -1,5 +1,5 @@
 ﻿using Common;
-using Infrastructure.Repositories;
+using Data.Repositories;
 using System;
 
 namespace Core.Services.Users

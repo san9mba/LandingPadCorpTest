@@ -1,7 +1,7 @@
 ﻿using BusinessEntities.Sales;
 using System.Collections.Generic;
 
-namespace Infrastructure.Repositories
+namespace Data.Repositories
 {
     public interface IProductRepository: IRepository<Product>
     {

@@ -1,5 +1,5 @@
 ﻿using BusinessEntities;
-using Infrastructure.DataProviders;
+using Data.DataProviders;
 using Raven.Client;
 using Raven.Client.Indexes;
 

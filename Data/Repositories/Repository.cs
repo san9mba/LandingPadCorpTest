@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using BusinessEntities;
-using Infrastructure.DataProviders;
-using Infrastructure.Repositories;
+using Data.DataProviders;
 
 namespace Data.Repositories
 {

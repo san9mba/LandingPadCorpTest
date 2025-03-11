@@ -4,7 +4,6 @@ using BusinessEntities;
 using Common;
 using Data.Indexes;
 using Data.Providers;
-using Infrastructure.Repositories;
 
 namespace Data.Repositories
 {

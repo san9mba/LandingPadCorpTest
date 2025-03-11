@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using BusinessEntities;
 
-namespace Infrastructure.Repositories
+namespace Data.Repositories
 {
     public interface IRepository<T> where T : IdObject
     {

@@ -1,6 +1,6 @@
 ﻿using BusinessEntities;
 using Common;
-using Infrastructure.DataProviders;
+using Data.DataProviders;
 using Raven.Abstractions.Data;
 using Raven.Client;
 using Raven.Client.Indexes;
